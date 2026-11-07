@@ -103,7 +103,7 @@ This experiment uses the conditional ZIP shortlist for stepwise parent selection
 Rscript code/supplementary/B4/Simulation_ZIO_shortlist.R 25 1 1 1250 4
 ```
 
-**Arguments:** `p`, `K`, `seed`, then optionally `N`, `workers`, `checkpoint_every`, `leave_free`, and `output_dir`. Optional environment variables configure the shortlist: `ZIPBN_PARENT_SELECTION` (default `shortlist`), `ZIPBN_SHORTLIST_B` (default `10`), and `ZIPBN_DMAX` (default `5`). Results are written under `output/simulation/shortlist/`.
+**Arguments:** `p`, `K`, `seed`, then optionally `N`, `workers`, `checkpoint_every`, `leave_free`, and `output_dir`. Optional environment variables configure the shortlist: `ZIO_PARENT_SELECTION` (default `shortlist`), `ZIO_SHORTLIST_B` (default `10`), and `ZIO_DMAX` (default `5`). Results are written under `output/simulation/shortlist/`.
 
 ### 7. Model misspecification — ZIP versus ZINB fitting
 
