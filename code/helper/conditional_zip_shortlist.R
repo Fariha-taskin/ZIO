@@ -5,9 +5,9 @@
 ## and information criterion remain unchanged.
 ##
 ## Configuration (environment variables):
-##   ZIPBN_PARENT_SELECTION = shortlist (default) or full
-##   ZIPBN_SHORTLIST_B      = number of fully fitted additions (default 10)
-##   ZIPBN_DMAX             = maximum selected parents (default 5; Inf allowed)
+##   ZIO_PARENT_SELECTION = shortlist (default) or full
+##   ZIO_SHORTLIST_B      = number of fully fitted additions (default 10)
+##   ZIO_DMAX             = maximum selected parents (default 5; Inf allowed)
 ##
 ## In shortlist mode, every forward round:
 ##   1. scores all remaining predecessors using a vectorized two-component
@@ -33,25 +33,25 @@ zip_stepwise_fit_node <- function(
   dist <- match.arg(dist)
 
   selection_mode <- tolower(Sys.getenv(
-    "ZIPBN_PARENT_SELECTION",
+    "ZIO_PARENT_SELECTION",
     unset = "shortlist"
   ))
   if (!selection_mode %in% c("shortlist", "full")) {
-    stop("ZIPBN_PARENT_SELECTION must be 'shortlist' or 'full'.")
+    stop("ZIO_PARENT_SELECTION must be 'shortlist' or 'full'.")
   }
   if (selection_mode == "shortlist" && dist != "poisson") {
     stop("Conditional ZIP-score shortlist currently supports dist='poisson'.")
   }
 
   top_b <- suppressWarnings(as.integer(Sys.getenv(
-    "ZIPBN_SHORTLIST_B",
+    "ZIO_SHORTLIST_B",
     unset = "10"
   )))
   if (is.na(top_b) || top_b < 1L) {
-    stop("ZIPBN_SHORTLIST_B must be a positive integer.")
+    stop("ZIO_SHORTLIST_B must be a positive integer.")
   }
 
-  dmax_text <- Sys.getenv("ZIPBN_DMAX", unset = "5")
+  dmax_text <- Sys.getenv("ZIO_DMAX", unset = "5")
   if (tolower(dmax_text) %in% c("inf", "infinity")) {
     dmax_requested <- Inf
   } else {
@@ -61,7 +61,7 @@ zip_stepwise_fit_node <- function(
       dmax_requested < 0 ||
       (!is.infinite(dmax_requested) &&
        dmax_requested != floor(dmax_requested))) {
-    stop("ZIPBN_DMAX must be a nonnegative integer or Inf.")
+    stop("ZIO_DMAX must be a nonnegative integer or Inf.")
   }
 
   X <- as.data.frame(X)
@@ -384,7 +384,7 @@ message(sprintf(
     "Loaded conditional ZIP-score parent selection: mode=%s, b=%s, ",
     "dmax=%s"
   ),
-  Sys.getenv("ZIPBN_PARENT_SELECTION", unset = "shortlist"),
-  Sys.getenv("ZIPBN_SHORTLIST_B", unset = "10"),
-  Sys.getenv("ZIPBN_DMAX", unset = "5")
+  Sys.getenv("ZIO_PARENT_SELECTION", unset = "shortlist"),
+  Sys.getenv("ZIO_SHORTLIST_B", unset = "10"),
+  Sys.getenv("ZIO_DMAX", unset = "5")
 ))

@@ -4,12 +4,11 @@ This repository provides the R implementation of **ZIO** and code for the simula
 
 ## Quick start
 
-**Run the commands below from the `ZIO/` repository root.** For example, after cloning the repository, run `cd ZIO`. All code uses paths relative to the repository, not drive-specific paths such as `D:/`.
-
+**Run the commands below from the `ZIO/` repository root.** For example, after cloning the repository, run `cd ZIO`. 
 ### Requirements
 
 - **R** with the packages: `pscl`, `igraph`, `MASS`, `foreach`, `doParallel`, `doRNG`, `dplyr`, `ggplot2`, `tidyr`, `tibble`, `glmnet`, `MXM`, `ggraph`, `tidygraph`, `viridis`, `ggbump`, `shadowtext`, and `readr`. The standard `parallel` and `grid` packages ship with R.
-- The **Python benchmark notebooks** additionally require the packages in `requirements-python.txt`. You can install those with `pip install -r requirements-python.txt` in a compatible Python environment.
+- The **Python benchmark notebooks** additionally require the packages in `requirements-python.txt`. Use `pip install -r requirements-python.txt` to in a compatible Python environment.
 
 For example, install the R dependencies with:
 
@@ -36,7 +35,7 @@ Rscript code/simulation/4.1/Simulation_ZIO.R 25 1 1 1000 4
 - `workers` *(optional)*: number of parallel workers requested (here, `4`).
 - `checkpoint_every`, `leave_free`, and `output_dir` are further optional arguments; see the script header.
 
-Simulation results are written to `output/simulation/4.1/final_simulation_results/`. Each seed produces a result containing `ZIPBN_DAG`.
+Simulation results are written to `output/simulation/4.1/final_simulation_results/`. Each seed produces a result containing `ZIO_DAG`.
 
 ### 2. Zero-inflation proportion experiment
 
@@ -64,7 +63,7 @@ The real-data script reads `data/control_list_41.rds` and `data/suicide_list_41.
 Rscript code/real_data/5/ZIO_realdata_joint.R
 ```
 
-The script currently uses `p = 41`, `N = 3000` and excludes the subject at original combined index 14. Its output is `output/ZIPBN_DAG_P_41_K_<K>.RData`, where `<K>` is the number of subjects remaining after exclusion. The final DAGs are stored in `ZIPBN_DAG$E_estimate`.
+The script currently uses `p = 41`, `N = 3000` and excludes the subject at original combined index 14. Its output is `output/ZIO_DAG_P_41_K_<K>.RData`, where `<K>` is the number of subjects remaining after exclusion. The final DAGs are stored in `ZIO_DAG$E_estimate`.
 
 For **individual-subject** analysis, pass the dataset index:
 
@@ -72,7 +71,7 @@ For **individual-subject** analysis, pass the dataset index:
 Rscript code/supplementary/C2/ZIO_realdata_individual.R 1
 ```
 
-Run with the appropriate index for each subject. Individual outputs are saved as `output/ZIPBN_DAG_P_41_K_1_dataset_XX.RData`.
+Run with the appropriate index for each subject. Individual outputs are saved as `output/ZIO_DAG_P_41_K_1_dataset_XX.RData`.
 
 ### 4. Operator comparison — R2R, RTS and ADJ
 
