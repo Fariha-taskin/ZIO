@@ -1,0 +1,13 @@
+# Baseline notebooks (ZICO, Poisson NOTEARS)
+# Install a compatible Python/PyTorch version for your environment.
+numpy
+pandas
+scipy
+matplotlib
+scikit-learn
+torch
+tqdm
+python-igraph
+seaborn
+ipython
+jupyterlab
