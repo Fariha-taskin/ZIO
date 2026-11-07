@@ -61,7 +61,7 @@ Results are written under `output/simulation/zero_proportions/`.
 The real-data script reads `data/control_list_41.rds` and `data/suicide_list_41.rds` and learns across the selected subjects:
 
 ```bash
-Rscript code/real_data/5/ZIO_realdata_joint_server_parallel.R
+Rscript code/real_data/5/ZIO_realdata_joint.R
 ```
 
 The script currently uses `p = 41`, `N = 3000` and excludes the subject at original combined index 14. Its output is `output/ZIPBN_DAG_P_41_K_<K>.RData`, where `<K>` is the number of subjects remaining after exclusion. The final DAGs are stored in `ZIPBN_DAG$E_estimate`.
@@ -69,7 +69,7 @@ The script currently uses `p = 41`, `N = 3000` and excludes the subject at origi
 For **individual-subject** analysis, pass the dataset index:
 
 ```bash
-Rscript code/supplementary/C2/ZIO_realdata_individual_server_parallel.R 1
+Rscript code/supplementary/C2/ZIO_realdata_individual.R 1
 ```
 
 Run with the appropriate index for each subject. Individual outputs are saved as `output/ZIPBN_DAG_P_41_K_1_dataset_XX.RData`.
