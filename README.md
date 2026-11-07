@@ -8,7 +8,7 @@ This repository provides the R implementation of **ZIO** and code for the simula
 ### Requirements
 
 - **R** with the packages: `pscl`, `igraph`, `MASS`, `foreach`, `doParallel`, `doRNG`, `dplyr`, `ggplot2`, `tidyr`, `tibble`, `glmnet`, `MXM`, `ggraph`, `tidygraph`, `viridis`, `ggbump`, `shadowtext`, and `readr`. The standard `parallel` and `grid` packages ship with R.
-- The **Python benchmark notebooks** additionally require the packages in `requirements-python.txt`. Use `pip install -r requirements-python.txt` to in a compatible Python environment.
+- The **Python benchmark notebooks** additionally require the packages in `requirements-python.txt`. Use `pip install -r requirements-python.txt` to install a compatible Python environment.
 
 For example, install the R dependencies with:
 

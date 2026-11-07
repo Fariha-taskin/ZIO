@@ -1,4 +1,4 @@
-# Independent ZIPBN real-data analysis (K = 1)
+# Independent ZIP real-data analysis (K = 1)
 # Script location: ZIO/code/supplementary/C2/
 # Usage: Rscript ZIO_realdata_individual_server_parallel.R <dataset_id>
 # Under Slurm, SLURM_ARRAY_TASK_ID is used if no dataset ID is passed.
@@ -212,7 +212,7 @@ main <- function() {
   # Save the full results in ONE .RData file per dataset
   # ----------------------------------------------------------
 
-  ZIPBN_DAG <- list(
+  ZIP_DAG <- list(
     dataset_id = dataset_id, dataset_info = current_info,
     n_sample = n_sample, removed_index = remove_original_index,
     K = K, p = p, c0 = c0, distribution = model_distribution,
@@ -229,11 +229,11 @@ main <- function() {
 
   dir.create(res_dir, recursive = TRUE, showWarnings = FALSE)
   output_file <- file.path(
-    res_dir, sprintf("ZIPBN_DAG_P_%d_K_1_dataset_%02d.RData", p, dataset_id)
+    res_dir, sprintf("ZIP_DAG_P_%d_K_1_dataset_%02d.RData", p, dataset_id)
   )
-  save(ZIPBN_DAG, file = output_file, compress = FALSE)
+  save(ZIP_DAG, file = output_file, compress = FALSE)
   cat("Saved:", output_file, "\n")
-  invisible(ZIPBN_DAG)
+  invisible(ZIP_DAG)
 }
 
 main()

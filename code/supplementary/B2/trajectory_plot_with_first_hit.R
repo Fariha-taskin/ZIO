@@ -53,7 +53,7 @@ if (!file.exists(reference_file)) stop("Missing reference result: ", reference_f
 
 env <- new.env(parent = globalenv())
 load(reference_file, envir = env)
-out <- env$ZIPBN_DAG$out
+out <- env$ZIO_DAG$out
 
 c0 <- 1
 criterion <- "BIC"
@@ -94,7 +94,7 @@ for (s in seeds) {
   files_s <- list.files(
     path = log_path,
     pattern = paste0(
-      "^ZIPBN_checkpoint_P_", p,
+      "^ZIO_checkpoint_P_", p,
       "_K_", K,
       "_seed", stored_seed,
       "_iter[0-9]+\\.RData$"

@@ -59,7 +59,7 @@ all_topological_orders <- function(E) {
   out
 }
 
-simulate_fixed_zipbn <- function(n, E, alpha_true, beta_true, delta_true, gamma_true, topo) {
+simulate_fixed_zio <- function(n, E, alpha_true, beta_true, delta_true, gamma_true, topo) {
   p <- nrow(E)
   X <- matrix(0, nrow = n, ncol = p)
   
@@ -155,7 +155,7 @@ one_run_theorem_sampled <- function(n,
                                     criterion = "BIC",
                                     dist = "poisson") {
   
-  X <- simulate_fixed_zipbn(
+  X <- simulate_fixed_zio(
     n = n,
     E = E_true,
     alpha_true = alpha_true,

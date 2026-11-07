@@ -1,5 +1,5 @@
 ## =====================================================================
-## ZIPBN order-based hill-climbing: zero-inflation simulations
+## ZIO order-based hill-climbing: zero-inflation simulations
 ##
 ## Key change:
 ##   Use ONE shared load-balanced task queue over (dataset k, position j)
@@ -259,7 +259,7 @@ set.seed(nseed)
         
         checkpoint_file <- file.path(
           log_path,
-          sprintf("ZIPBN_checkpoint_P_%d_K_%d_seed%d_iter%d.RData", p_now, K_now, nseed, t)
+          sprintf("ZIO_checkpoint_P_%d_K_%d_seed%d_iter%d.RData", p_now, K_now, nseed, t)
         )
         save(checkpoint, file = checkpoint_file)
       }
@@ -285,7 +285,7 @@ set.seed(nseed)
     ## ---------------------------------------------------------------
     ## 7. Final result object
     ## ---------------------------------------------------------------
-    ZIPBN_DAG <- list(
+    ZIO_DAG <- list(
       workers = workers,
       Adjacency_matrix = Adjacency_matrix[[N]],
       result_IC = result_IC[[N]],
@@ -301,21 +301,21 @@ set.seed(nseed)
     )
     
     final_rdata <- file.path(final_res_dir, sprintf("p%d_K%d_seed%d.RData", p_now, K_now, nseed))
-    save(ZIPBN_DAG, file = final_rdata)
+    save(ZIO_DAG, file = final_rdata)
     
     summary_file <- file.path(final_res_dir, sprintf("simulation_result_%d_%d_%d.txt", n, p_now, K_now))
     cat(sprintf("\nsim result for seed: %d", nseed), file = summary_file, append = TRUE)
     cat(sprintf("\niteration number: %d", N), file = summary_file, append = TRUE)
     cat("\npermutation:", file = summary_file, append = TRUE)
-    cat(ZIPBN_DAG$sampled_ordering, sep = " ", file = summary_file, append = TRUE)
+    cat(ZIO_DAG$sampled_ordering, sep = " ", file = summary_file, append = TRUE)
     cat("\ndifference between true DAGs:", file = summary_file, append = TRUE)
-    cat(ZIPBN_DAG$ave_diff, sep = " ", file = summary_file, append = TRUE)
-    cat(sprintf("\ntau: %s", ZIPBN_DAG$tau), file = summary_file, append = TRUE)
-    cat(sprintf("\ntime: %s", ZIPBN_DAG$timeit), file = summary_file, append = TRUE)
-    cat(sprintf("\ntrajectory: %s", paste(unlist(ZIPBN_DAG$BIC_score), collapse = " ")),
+    cat(ZIO_DAG$ave_diff, sep = " ", file = summary_file, append = TRUE)
+    cat(sprintf("\ntau: %s", ZIO_DAG$tau), file = summary_file, append = TRUE)
+    cat(sprintf("\ntime: %s", ZIO_DAG$timeit), file = summary_file, append = TRUE)
+    cat(sprintf("\ntrajectory: %s", paste(unlist(ZIO_DAG$BIC_score), collapse = " ")),
         file = summary_file, append = TRUE)
-    cat(sprintf("\nFP: %s", ZIPBN_DAG$FP), file = summary_file, append = TRUE)
-    cat(sprintf("\nFN: %s", ZIPBN_DAG$FN), file = summary_file, append = TRUE)
+    cat(sprintf("\nFP: %s", ZIO_DAG$FP), file = summary_file, append = TRUE)
+    cat(sprintf("\nFN: %s", ZIO_DAG$FN), file = summary_file, append = TRUE)
     cat(sprintf("\nworkers: %d\n", workers), file = summary_file, append = TRUE)
 }
 

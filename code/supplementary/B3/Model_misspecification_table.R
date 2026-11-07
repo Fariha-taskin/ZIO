@@ -62,7 +62,7 @@ read_distribution <- function(distribution) {
     
     env <- new.env(parent = emptyenv())
     load(path, envir = env)
-    fit <- env$ZIPBN_DAG
+    fit <- env$ZIO_DAG
     
     estimated <- fit$Adjacency_matrix[[1]]
     truth <- fit$out$E_true[[1]]

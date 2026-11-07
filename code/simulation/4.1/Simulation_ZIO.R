@@ -1,5 +1,5 @@
 ## =====================================================================
-## ZIPBN order-based hill-climbing
+## ZIO order-based hill-climbing
 ## Single global worker-pool version
 ##
 ## Required command-line arguments:
@@ -43,7 +43,7 @@ main <- function() {
     stop(
       paste(
         "Usage:",
-        "Rscript Simulation_ZIPBN.R",
+        "Rscript Simulation_ZIO.R",
         "p K seed [N] [workers] [checkpoint_every] [leave_free] [output_dir]",
         "\nExample:",
         "Rscript Simulation_ZIO.R 40 20 1 3000 120 100 4 ZIO/output/simulation/4.1/final_simulation_results"
@@ -423,7 +423,7 @@ main <- function() {
       checkpoint_file <- file.path(
         log_path,
         sprintf(
-          "ZIPBN_checkpoint_P_%d_K_%d_seed%d_iter%d.RData",
+          "ZIO_checkpoint_P_%d_K_%d_seed%d_iter%d.RData",
           p,
           K,
           nseed,
@@ -475,7 +475,7 @@ main <- function() {
   # -------------------------------------------------------------------
   # 7. Final result object
   # -------------------------------------------------------------------
-  ZIPBN_DAG <- list(
+  ZIO_DAG <- list(
     seed = nseed,
     p = p,
     K = K,
@@ -520,7 +520,7 @@ main <- function() {
   )
 
   save(
-    ZIPBN_DAG,
+    ZIO_DAG,
     file = final_rdata
   )
 
@@ -549,7 +549,7 @@ main <- function() {
   cat(
     paste0(
       "Permutation: ",
-      paste(ZIPBN_DAG$sampled_ordering, collapse = " "),
+      paste(ZIO_DAG$sampled_ordering, collapse = " "),
       "\n"
     ),
     file = summary_file,
@@ -559,20 +559,20 @@ main <- function() {
   cat(
     sprintf(
       "Average difference between true and estimated DAGs: %s\n",
-      ZIPBN_DAG$ave_diff
+      ZIO_DAG$ave_diff
     ),
     file = summary_file,
     append = TRUE
   )
 
   cat(
-    sprintf("Tau: %s\n", ZIPBN_DAG$tau),
+    sprintf("Tau: %s\n", ZIO_DAG$tau),
     file = summary_file,
     append = TRUE
   )
 
   cat(
-    sprintf("Time: %s\n", ZIPBN_DAG$timeit),
+    sprintf("Time: %s\n", ZIO_DAG$timeit),
     file = summary_file,
     append = TRUE
   )
@@ -580,7 +580,7 @@ main <- function() {
   cat(
     paste0(
       "BIC trajectory: ",
-      paste(ZIPBN_DAG$BIC_score, collapse = " "),
+      paste(ZIO_DAG$BIC_score, collapse = " "),
       "\n"
     ),
     file = summary_file,
@@ -588,13 +588,13 @@ main <- function() {
   )
 
   cat(
-    sprintf("FP: %s\n", ZIPBN_DAG$FP),
+    sprintf("FP: %s\n", ZIO_DAG$FP),
     file = summary_file,
     append = TRUE
   )
 
   cat(
-    sprintf("FN: %s\n", ZIPBN_DAG$FN),
+    sprintf("FN: %s\n", ZIO_DAG$FN),
     file = summary_file,
     append = TRUE
   )

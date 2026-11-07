@@ -1,4 +1,4 @@
-# Joint ZIPBN real-data analysis: one final .RData file
+# Joint ZIO real-data analysis: one final .RData file
 # Script location: ZIO/code/real_data/5/
 
 # ------------------------------------------------------------
@@ -215,7 +215,7 @@ main <- function() {
   # Save the complete results in ONE .RData file
   # ----------------------------------------------------------
 
-  ZIPBN_DAG <- list(
+  ZIO_DAG <- list(
     K = K, p = p, c0 = c0, distribution = model_distribution,
     dataset_info = dataset_info, n_sample = n_sample,
     removed_index = remove_original_index,
@@ -235,10 +235,10 @@ main <- function() {
   )
 
   dir.create(res_dir, showWarnings = FALSE, recursive = TRUE)
-  output_file <- file.path(res_dir, sprintf("ZIPBN_DAG_P_%d_K_%d.RData", p, K))
-  save(ZIPBN_DAG, file = output_file)
+  output_file <- file.path(res_dir, sprintf("ZIO_DAG_P_%d_K_%d.RData", p, K))
+  save(ZIO_DAG, file = output_file)
   cat("Saved:", output_file, "\n")
-  invisible(ZIPBN_DAG)
+  invisible(ZIO_DAG)
 }
 
 main()

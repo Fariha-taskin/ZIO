@@ -122,10 +122,10 @@ summarize_setting <- function(n, k, zero) {
     env <- new.env()
     load(path, envir = env)
     
-    fit <- env$ZIPBN_DAG
+    fit <- env$ZIO_DAG
     
     if (is.null(fit)) {
-      stop("ZIPBN_DAG was not found in: ", path)
+      stop("ZIO_DAG was not found in: ", path)
     }
     
     estimated_graphs <- get_graph_list(

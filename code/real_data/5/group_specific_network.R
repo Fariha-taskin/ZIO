@@ -20,14 +20,14 @@ if (!dir.exists(file.path(project_dir, "code", "helper"))) {
 data_dir <- file.path(project_dir, "data")
 output_dir <- file.path(project_dir, "output")
 
-load(file.path(output_dir, "ZIPBN_DAG_P_41_K_33.RData"))
+load(file.path(output_dir, "ZIO_DAG_P_41_K_33.RData"))
 control <- readRDS(file.path(data_dir, "control_list_41.rds"))
 genes <- colnames(control[["control_2"]])
-stopifnot(length(genes) == 41L,length(ZIPBN_DAG$E_estimate) == 33L)
+stopifnot(length(genes) == 41L,length(ZIO_DAG$E_estimate) == 33L)
 
 save_dir <- file.path(output_dir, "real_data_41")
 dir.create(save_dir, recursive = TRUE, showWarnings = FALSE)
-dags <- ZIPBN_DAG$E_estimate
+dags <- ZIO_DAG$E_estimate
 
 # Assumption: adjacency[i, j] = 1 represents gene i -> gene j.
 dags <- lapply(seq_along(dags), function(k) {

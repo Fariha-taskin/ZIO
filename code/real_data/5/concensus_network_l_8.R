@@ -20,10 +20,10 @@ if (!dir.exists(file.path(project_dir, "code", "helper"))) {
 data_dir <- file.path(project_dir, "data")
 output_dir <- file.path(project_dir, "output")
 
-load(file.path(output_dir, "ZIPBN_DAG_P_41_K_33.RData"))
+load(file.path(output_dir, "ZIO_DAG_P_41_K_33.RData"))
 control <- readRDS(file.path(data_dir, "control_list_41.rds"))
 genes <- colnames(control[["control_2"]])
-stopifnot(length(genes) == 41L,length(ZIPBN_DAG$E_estimate) == 33L)
+stopifnot(length(genes) == 41L,length(ZIO_DAG$E_estimate) == 33L)
 
 save_dir <- file.path(output_dir, "real_data_41")
 dir.create(save_dir, recursive = TRUE, showWarnings = FALSE)
@@ -43,8 +43,8 @@ safe_topo_sort <- function(graph, mode = "out") {
   igraph::topo_sort(graph, mode = mode)
 }
 
-control_dag_list <- ZIPBN_DAG$E_estimate[1:16]
-case_dag_list    <- ZIPBN_DAG$E_estimate[17:33]
+control_dag_list <- ZIO_DAG$E_estimate[1:16]
+case_dag_list    <- ZIO_DAG$E_estimate[17:33]
 
 n_control <- length(control_dag_list)
 n_case    <- length(case_dag_list)

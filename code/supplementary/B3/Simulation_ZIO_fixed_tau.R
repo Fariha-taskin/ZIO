@@ -1,5 +1,5 @@
 ## =====================================================================
-## ZIPBN fixed-tau ordering violation simulation
+## ZIO fixed-tau ordering violation simulation
 ##
 ## Command line:
 ##   Rscript Simulation_ZIO_fixed_tau.R n p K seed tau_target [N] [workers] [checkpoint_every] [leave_free] [output_dir]
@@ -144,7 +144,7 @@ for (k in seq_len(K)) {
   X_perm[[k]] <- X[[k]][, idx]
 }
 
-## ZIPBN uses the permuted data matrices directly
+## ZIO uses the permuted data matrices directly
 dat_list <- X_perm
 E_true_perm <- G_perm
 
@@ -416,7 +416,7 @@ for (t in seq_len(N)) {
     checkpoint_file <- file.path(
       log_path,
       sprintf(
-        "ZIPBN_checkpoint_P_%d_K_%d_seed%d_tau%s_iter%d.RData",
+        "ZIO_checkpoint_P_%d_K_%d_seed%d_tau%s_iter%d.RData",
         p, K, nseed, tau_target, t
       )
     )
@@ -452,7 +452,7 @@ elapsed <- Sys.time() - start_time
 ## ---------------------------------------------------------------------
 ## 10. Final result object
 ## ---------------------------------------------------------------------
-ZIPBN_DAG <- list(
+ZIO_DAG <- list(
   seed = nseed,
   n = n,
   p = p,
@@ -515,7 +515,7 @@ final_rdata <- file.path(
   sprintf("p%d_K%d_seed%d_tau%s.RData", p, K, nseed, tau_target)
 )
 
-save(ZIPBN_DAG, file = final_rdata)
+save(ZIO_DAG, file = final_rdata)
 
 summary_file <- file.path(
   final_res_dir,
@@ -528,16 +528,16 @@ cat(sprintf("\ntau_target: %s", tau_target), file = summary_file, append = TRUE)
 cat(sprintf("\nmean imposed pairwise tau: %s", mean_upper_tau), file = summary_file, append = TRUE)
 
 cat("\npermutation:", file = summary_file, append = TRUE)
-cat(ZIPBN_DAG$sampled_ordering, sep = " ", file = summary_file, append = TRUE)
+cat(ZIO_DAG$sampled_ordering, sep = " ", file = summary_file, append = TRUE)
 
 cat("\ndifference between true DAGs:", file = summary_file, append = TRUE)
-cat(ZIPBN_DAG$ave_diff, sep = " ", file = summary_file, append = TRUE)
+cat(ZIO_DAG$ave_diff, sep = " ", file = summary_file, append = TRUE)
 
-cat(sprintf("\ntau: %s", ZIPBN_DAG$tau), file = summary_file, append = TRUE)
-cat(sprintf("\ntime: %s", ZIPBN_DAG$timeit), file = summary_file, append = TRUE)
-cat(sprintf("\ntrajectory: %s", ZIPBN_DAG$BIC_score), file = summary_file, append = TRUE)
-cat(sprintf("\nFP: %s", ZIPBN_DAG$FP), file = summary_file, append = TRUE)
-cat(sprintf("\nFN: %s", ZIPBN_DAG$FN), file = summary_file, append = TRUE)
+cat(sprintf("\ntau: %s", ZIO_DAG$tau), file = summary_file, append = TRUE)
+cat(sprintf("\ntime: %s", ZIO_DAG$timeit), file = summary_file, append = TRUE)
+cat(sprintf("\ntrajectory: %s", ZIO_DAG$BIC_score), file = summary_file, append = TRUE)
+cat(sprintf("\nFP: %s", ZIO_DAG$FP), file = summary_file, append = TRUE)
+cat(sprintf("\nFN: %s", ZIO_DAG$FN), file = summary_file, append = TRUE)
 cat(sprintf("\nworkers: %d\n", workers), file = summary_file, append = TRUE)
 
 cat("\nFinished successfully.\n", file = log_file, append = TRUE)

@@ -129,14 +129,14 @@ main <- function() {
   direction <- "both"
   max_steps <- 1000L
   parent_selection <- Sys.getenv(
-    "ZIPBN_PARENT_SELECTION",
+    "ZIO_PARENT_SELECTION",
     unset = "shortlist"
   )
   shortlist_b <- as.integer(Sys.getenv(
-    "ZIPBN_SHORTLIST_B",
+    "ZIO_SHORTLIST_B",
     unset = "10"
   ))
-  dmax_text <- Sys.getenv("ZIPBN_DMAX", unset = "5")
+  dmax_text <- Sys.getenv("ZIO_DMAX", unset = "5")
   dmax <- if (tolower(dmax_text) %in% c("inf", "infinity")) {
     Inf
   } else {
@@ -144,9 +144,9 @@ main <- function() {
   }
 
   if (is.na(shortlist_b) || shortlist_b < 1L)
-    stop("ZIPBN_SHORTLIST_B must be a positive integer.")
+    stop("ZIO_SHORTLIST_B must be a positive integer.")
   if (is.na(dmax) || dmax <= 0)
-    stop("ZIPBN_DMAX must be positive or Inf.")
+    stop("ZIO_DMAX must be positive or Inf.")
 
   # Random initial order
   curr_order <- sample.int(p, size = p, replace = FALSE)
@@ -310,7 +310,7 @@ main <- function() {
 
       checkpoint_file <- file.path(
         log_path,
-        sprintf("ZIPBN_checkpoint_P_%d_K_%d_seed%d_iter%d.RData", p, K, nseed, t)
+        sprintf("ZIO_checkpoint_P_%d_K_%d_seed%d_iter%d.RData", p, K, nseed, t)
       )
       save(checkpoint, file = checkpoint_file)
     }
@@ -336,7 +336,7 @@ main <- function() {
   # ---------------------------------------------------------------------
   # 7. Final result object
   # ---------------------------------------------------------------------
-  ZIPBN_DAG <- list(
+  ZIO_DAG <- list(
     seed = nseed,
     p = p,
     K = K,
@@ -366,20 +366,20 @@ main <- function() {
     warning("Overwriting an existing replicate: ", final_rdata,
             ". Use the optional output_dir argument for separate ablation settings.")
   }
-  save(ZIPBN_DAG, file = final_rdata)
+  save(ZIO_DAG, file = final_rdata)
 
   summary_file <- file.path(final_res_dir, sprintf("simulation_result_%d_%d_%d.txt", 1000, p, K))
   cat(sprintf("\nsim result for seed: %d", nseed), file = summary_file, append = TRUE)
   cat(sprintf("\niteration number: %d", N), file = summary_file, append = TRUE)
   cat("\npermutation:", file = summary_file, append = TRUE)
-  cat(ZIPBN_DAG$sampled_ordering, sep = " ", file = summary_file, append = TRUE)
+  cat(ZIO_DAG$sampled_ordering, sep = " ", file = summary_file, append = TRUE)
   cat("\ndifference between true DAGs:", file = summary_file, append = TRUE)
-  cat(ZIPBN_DAG$ave_diff, sep = " ", file = summary_file, append = TRUE)
-  cat(sprintf("\ntau: %s", ZIPBN_DAG$tau), file = summary_file, append = TRUE)
-  cat(sprintf("\ntime: %s", ZIPBN_DAG$timeit), file = summary_file, append = TRUE)
-  cat(sprintf("\ntrajectory: %s", ZIPBN_DAG$BIC_score), file = summary_file, append = TRUE)
-  cat(sprintf("\nFP: %s", ZIPBN_DAG$FP), file = summary_file, append = TRUE)
-  cat(sprintf("\nFN: %s", ZIPBN_DAG$FN), file = summary_file, append = TRUE)
+  cat(ZIO_DAG$ave_diff, sep = " ", file = summary_file, append = TRUE)
+  cat(sprintf("\ntau: %s", ZIO_DAG$tau), file = summary_file, append = TRUE)
+  cat(sprintf("\ntime: %s", ZIO_DAG$timeit), file = summary_file, append = TRUE)
+  cat(sprintf("\ntrajectory: %s", ZIO_DAG$BIC_score), file = summary_file, append = TRUE)
+  cat(sprintf("\nFP: %s", ZIO_DAG$FP), file = summary_file, append = TRUE)
+  cat(sprintf("\nFN: %s", ZIO_DAG$FN), file = summary_file, append = TRUE)
   cat(sprintf("\nworkers: %d\n", workers), file = summary_file, append = TRUE)
   cat(
     sprintf(

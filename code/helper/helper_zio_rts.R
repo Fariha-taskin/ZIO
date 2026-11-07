@@ -285,7 +285,7 @@ zip_make_tasks <- function(K, positions_by_k) {
 
 # -----------------------------------------------------------------------------
 # Cluster helpers.
-# - Data are broadcast once to workers as ZIPBN_DAT_LIST.
+# - Data are broadcast once to workers as ZIO_DAT_LIST.
 # - This avoids re-serializing all K datasets at every hill-climbing step.
 # -----------------------------------------------------------------------------
 zip_make_cluster <- function(workers, dat_list) {
@@ -321,8 +321,8 @@ zip_make_cluster <- function(workers, dat_list) {
     envir = globalenv()
   )
   
-  tmp_env <- list2env(list(ZIPBN_DAT_LIST = dat_list), parent = emptyenv())
-  parallel::clusterExport(cl, varlist = "ZIPBN_DAT_LIST", envir = tmp_env)
+  tmp_env <- list2env(list(ZIO_DAT_LIST = dat_list), parent = emptyenv())
+  parallel::clusterExport(cl, varlist = "ZIO_DAT_LIST", envir = tmp_env)
   
   cl
 }
@@ -433,7 +433,7 @@ zip_evaluate_order <- function(dat_list,
       tasks,
       fun = function(task, topo, c0, direction, criterion, dist, trace, max_steps) {
         fit <- zip_stepwise_fit_node(
-          X = ZIPBN_DAT_LIST[[task$k]],
+          X = ZIO_DAT_LIST[[task$k]],
           topo = topo,
           pos = task$pos,
           c0 = c0,

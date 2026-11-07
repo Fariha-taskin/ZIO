@@ -27,7 +27,7 @@ control_ids <- 1:16
 case_ids <- 17:33
 thresholds <- 1:17
 
-load(file.path(output_dir, "ZIPBN_DAG_P_41_K_33.RData"))
+load(file.path(output_dir, "ZIO_DAG_P_41_K_33.RData"))
 control <- readRDS(file.path(data_dir, "control_list_41.rds"))
 genes <- colnames(control[["control_2"]])
 
@@ -35,7 +35,7 @@ stopifnot(
   length(genes) == p,
   !anyNA(genes),
   !anyDuplicated(genes),
-  length(ZIPBN_DAG$E_estimate) == 33L
+  length(ZIO_DAG$E_estimate) == 33L
 )
 
 dir.create(save_dir, recursive = TRUE, showWarnings = FALSE)
@@ -63,7 +63,7 @@ extract_dag <- function(A) {
   A
 }
 
-dags <- lapply(ZIPBN_DAG$E_estimate, extract_dag)
+dags <- lapply(ZIO_DAG$E_estimate, extract_dag)
 control_counts <- Reduce(`+`, dags[control_ids])
 case_counts <- Reduce(`+`, dags[case_ids])
 
